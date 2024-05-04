@@ -1,0 +1,65 @@
+#this displays the menu and prompts the user what the press
+def display_menu():
+    print("\n===== To-Do List Menu =====")
+    print("1. Add task")
+    print("2. View tasks")
+    print("3. Mark task as done")
+    print("4. Delete task")
+    print("5. Exit")
+
+#this is the list of tasks that need to be done
+todo_list = []
+
+def add_task(todo_list):
+    task = input("Enter task: ")
+    todo_list.append(task)
+    print("Task added successfully!")
+#this is how the user can view the tasks that need to be done
+def view_tasks(todo_list):
+    if todo_list:
+        print("\n===== To-Do List =====")
+        for index, task in enumerate(todo_list, start=1):
+            print(f"{index}. {task}")
+    else:
+        print("Your to-do list is empty.")
+#this marks a task in the todo list as done, effectively deleting it
+def mark_task_as_done(todo_list):
+    view_tasks(todo_list)
+    if todo_list:
+        task_number = int(input("Enter the task number to mark as done: "))
+        if 1 <= task_number <= len(todo_list):
+            print(f"Task '{todo_list[task_number - 1]}' marked as done.")
+            todo_list.pop(task_number - 1)
+        else:
+            print("Invalid task number.")
+    else:
+        print("Your to-do list is empty.")
+#this deletes a task from the todo list
+def delete_task(todo_list):
+    view_tasks(todo_list)
+    if todo_list:
+        task_number = int(input("Enter the task number to delete: "))
+        if 1 <= task_number <= len(todo_list):
+            print(f"Task '{todo_list[task_number - 1]}' deleted.")
+            todo_list.pop(task_number - 1)
+        else:
+            print("Invalid task number.")
+    else:
+        print("Your to-do list is empty.")
+#this calls back a funtion when the user presses a number key 1-5
+while True:
+    display_menu()
+    choice = input("Enter your choice (1-5): ")
+    if choice == '1':
+        add_task(todo_list)
+    elif choice == '2':
+        view_tasks(todo_list)
+    elif choice == '3':
+        mark_task_as_done(todo_list)
+    elif choice == '4':
+        delete_task(todo_list)
+    elif choice == '5':
+        print("Exiting program. Goodbye!")
+        break
+    else: 
+        print("Invalid choice. Please choose a number from 1 to 5.")
